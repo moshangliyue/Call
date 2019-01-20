@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.call.project.mapper.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.call.project.bean.Project" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="pintro" property="pintro" jdbcType="VARCHAR" />
+    <result column="ptypes" property="ptypes" jdbcType="VARCHAR" />
+    <result column="pamount" property="pamount" jdbcType="INTEGER" />
+    <result column="pstart" property="pstart" jdbcType="TIMESTAMP" />
+    <result column="pend" property="pend" jdbcType="TIMESTAMP" />
+    <result column="pimg" property="pimg" jdbcType="VARCHAR" />
+    <result column="pdetail" property="pdetail" jdbcType="VARCHAR" />
+    <result column="pcomname" property="pcomname" jdbcType="VARCHAR" />
+    <result column="pcomphon" property="pcomphon" jdbcType="VARCHAR" />
+    <result column="pbank" property="pbank" jdbcType="VARCHAR" />
+    <result column="pbanknumber" property="pbanknumber" jdbcType="VARCHAR" />
+    <result column="phtypes" property="phtypes" jdbcType="VARCHAR" />
+    <result column="phamount" property="phamount" jdbcType="INTEGER" />
+    <result column="phcontent" property="phcontent" jdbcType="VARCHAR" />
+    <result column="phnumberpeople" property="phnumberpeople" jdbcType="INTEGER" />
+    <result column="phday" property="phday" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, pname, pintro, ptypes, pamount, pstart, pend, pimg, pdetail, pcomname, pcomphon, 
+    pbank, pbanknumber, phtypes, phamount, phcontent, phnumberpeople, phday
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.call.project.bean.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from project
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.call.project.bean.ProjectExample" >
+    delete from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.call.project.bean.Project" >
+    insert into project (pid, pname, pintro, 
+      ptypes, pamount, pstart, 
+      pend, pimg, pdetail, 
+      pcomname, pcomphon, pbank, 
+      pbanknumber, phtypes, phamount, 
+      phcontent, phnumberpeople, phday
+      )
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{pintro,jdbcType=VARCHAR}, 
+      #{ptypes,jdbcType=VARCHAR}, #{pamount,jdbcType=INTEGER}, #{pstart,jdbcType=TIMESTAMP}, 
+      #{pend,jdbcType=TIMESTAMP}, #{pimg,jdbcType=VARCHAR}, #{pdetail,jdbcType=VARCHAR}, 
+      #{pcomname,jdbcType=VARCHAR}, #{pcomphon,jdbcType=VARCHAR}, #{pbank,jdbcType=VARCHAR}, 
+      #{pbanknumber,jdbcType=VARCHAR}, #{phtypes,jdbcType=VARCHAR}, #{phamount,jdbcType=INTEGER}, 
+      #{phcontent,jdbcType=VARCHAR}, #{phnumberpeople,jdbcType=INTEGER}, #{phday,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.call.project.bean.Project" >
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pintro != null" >
+        pintro,
+      </if>
+      <if test="ptypes != null" >
+        ptypes,
+      </if>
+      <if test="pamount != null" >
+        pamount,
+      </if>
+      <if test="pstart != null" >
+        pstart,
+      </if>
+      <if test="pend != null" >
+        pend,
+      </if>
+      <if test="pimg != null" >
+        pimg,
+      </if>
+      <if test="pdetail != null" >
+        pdetail,
+      </if>
+      <if test="pcomname != null" >
+        pcomname,
+      </if>
+      <if test="pcomphon != null" >
+        pcomphon,
+      </if>
+      <if test="pbank != null" >
+        pbank,
+      </if>
+      <if test="pbanknumber != null" >
+        pbanknumber,
+      </if>
+      <if test="phtypes != null" >
+        phtypes,
+      </if>
+      <if test="phamount != null" >
+        phamount,
+      </if>
+      <if test="phcontent != null" >
+        phcontent,
+      </if>
+      <if test="phnumberpeople != null" >
+        phnumberpeople,
+      </if>
+      <if test="phday != null" >
+        phday,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pintro != null" >
+        #{pintro,jdbcType=VARCHAR},
+      </if>
+      <if test="ptypes != null" >
+        #{ptypes,jdbcType=VARCHAR},
+      </if>
+      <if test="pamount != null" >
+        #{pamount,jdbcType=INTEGER},
+      </if>
+      <if test="pstart != null" >
+        #{pstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pend != null" >
+        #{pend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pimg != null" >
+        #{pimg,jdbcType=VARCHAR},
+      </if>
+      <if test="pdetail != null" >
+        #{pdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="pcomname != null" >
+        #{pcomname,jdbcType=VARCHAR},
+      </if>
+      <if test="pcomphon != null" >
+        #{pcomphon,jdbcType=VARCHAR},
+      </if>
+      <if test="pbank != null" >
+        #{pbank,jdbcType=VARCHAR},
+      </if>
+      <if test="pbanknumber != null" >
+        #{pbanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phtypes != null" >
+        #{phtypes,jdbcType=VARCHAR},
+      </if>
+      <if test="phamount != null" >
+        #{phamount,jdbcType=INTEGER},
+      </if>
+      <if test="phcontent != null" >
+        #{phcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="phnumberpeople != null" >
+        #{phnumberpeople,jdbcType=INTEGER},
+      </if>
+      <if test="phday != null" >
+        #{phday,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.call.project.bean.ProjectExample" resultType="java.lang.Integer" >
+    select count(*) from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update project
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pintro != null" >
+        pintro = #{record.pintro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptypes != null" >
+        ptypes = #{record.ptypes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pamount != null" >
+        pamount = #{record.pamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.pstart != null" >
+        pstart = #{record.pstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pend != null" >
+        pend = #{record.pend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pimg != null" >
+        pimg = #{record.pimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdetail != null" >
+        pdetail = #{record.pdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcomname != null" >
+        pcomname = #{record.pcomname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcomphon != null" >
+        pcomphon = #{record.pcomphon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbank != null" >
+        pbank = #{record.pbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pbanknumber != null" >
+        pbanknumber = #{record.pbanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phtypes != null" >
+        phtypes = #{record.phtypes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phamount != null" >
+        phamount = #{record.phamount,jdbcType=INTEGER},
+      </if>
+      <if test="record.phcontent != null" >
+        phcontent = #{record.phcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phnumberpeople != null" >
+        phnumberpeople = #{record.phnumberpeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.phday != null" >
+        phday = #{record.phday,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update project
+    set pid = #{record.pid,jdbcType=INTEGER},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      pintro = #{record.pintro,jdbcType=VARCHAR},
+      ptypes = #{record.ptypes,jdbcType=VARCHAR},
+      pamount = #{record.pamount,jdbcType=INTEGER},
+      pstart = #{record.pstart,jdbcType=TIMESTAMP},
+      pend = #{record.pend,jdbcType=TIMESTAMP},
+      pimg = #{record.pimg,jdbcType=VARCHAR},
+      pdetail = #{record.pdetail,jdbcType=VARCHAR},
+      pcomname = #{record.pcomname,jdbcType=VARCHAR},
+      pcomphon = #{record.pcomphon,jdbcType=VARCHAR},
+      pbank = #{record.pbank,jdbcType=VARCHAR},
+      pbanknumber = #{record.pbanknumber,jdbcType=VARCHAR},
+      phtypes = #{record.phtypes,jdbcType=VARCHAR},
+      phamount = #{record.phamount,jdbcType=INTEGER},
+      phcontent = #{record.phcontent,jdbcType=VARCHAR},
+      phnumberpeople = #{record.phnumberpeople,jdbcType=INTEGER},
+      phday = #{record.phday,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.call.project.bean.Project" >
+    update project
+    <set >
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pintro != null" >
+        pintro = #{pintro,jdbcType=VARCHAR},
+      </if>
+      <if test="ptypes != null" >
+        ptypes = #{ptypes,jdbcType=VARCHAR},
+      </if>
+      <if test="pamount != null" >
+        pamount = #{pamount,jdbcType=INTEGER},
+      </if>
+      <if test="pstart != null" >
+        pstart = #{pstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pend != null" >
+        pend = #{pend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pimg != null" >
+        pimg = #{pimg,jdbcType=VARCHAR},
+      </if>
+      <if test="pdetail != null" >
+        pdetail = #{pdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="pcomname != null" >
+        pcomname = #{pcomname,jdbcType=VARCHAR},
+      </if>
+      <if test="pcomphon != null" >
+        pcomphon = #{pcomphon,jdbcType=VARCHAR},
+      </if>
+      <if test="pbank != null" >
+        pbank = #{pbank,jdbcType=VARCHAR},
+      </if>
+      <if test="pbanknumber != null" >
+        pbanknumber = #{pbanknumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phtypes != null" >
+        phtypes = #{phtypes,jdbcType=VARCHAR},
+      </if>
+      <if test="phamount != null" >
+        phamount = #{phamount,jdbcType=INTEGER},
+      </if>
+      <if test="phcontent != null" >
+        phcontent = #{phcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="phnumberpeople != null" >
+        phnumberpeople = #{phnumberpeople,jdbcType=INTEGER},
+      </if>
+      <if test="phday != null" >
+        phday = #{phday,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.call.project.bean.Project" >
+    update project
+    set pname = #{pname,jdbcType=VARCHAR},
+      pintro = #{pintro,jdbcType=VARCHAR},
+      ptypes = #{ptypes,jdbcType=VARCHAR},
+      pamount = #{pamount,jdbcType=INTEGER},
+      pstart = #{pstart,jdbcType=TIMESTAMP},
+      pend = #{pend,jdbcType=TIMESTAMP},
+      pimg = #{pimg,jdbcType=VARCHAR},
+      pdetail = #{pdetail,jdbcType=VARCHAR},
+      pcomname = #{pcomname,jdbcType=VARCHAR},
+      pcomphon = #{pcomphon,jdbcType=VARCHAR},
+      pbank = #{pbank,jdbcType=VARCHAR},
+      pbanknumber = #{pbanknumber,jdbcType=VARCHAR},
+      phtypes = #{phtypes,jdbcType=VARCHAR},
+      phamount = #{phamount,jdbcType=INTEGER},
+      phcontent = #{phcontent,jdbcType=VARCHAR},
+      phnumberpeople = #{phnumberpeople,jdbcType=INTEGER},
+      phday = #{phday,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

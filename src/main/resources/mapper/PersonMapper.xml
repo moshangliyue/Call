@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.call.person.mapper.PersonMapper" >
+  <resultMap id="BaseResultMap" type="com.call.person.bean.Person" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="plocation" property="plocation" jdbcType="VARCHAR" />
+    <result column="paddress" property="paddress" jdbcType="VARCHAR" />
+    <result column="pzipcode" property="pzipcode" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="pphon" property="pphon" jdbcType="VARCHAR" />
+    <result column="pdianhua" property="pdianhua" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, plocation, paddress, pzipcode, pname, pphon, pdianhua
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.call.person.bean.PersonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from person
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from person
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.call.person.bean.PersonExample" >
+    delete from person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.call.person.bean.Person" >
+    insert into person (pid, plocation, paddress, 
+      pzipcode, pname, pphon, 
+      pdianhua)
+    values (#{pid,jdbcType=INTEGER}, #{plocation,jdbcType=VARCHAR}, #{paddress,jdbcType=VARCHAR}, 
+      #{pzipcode,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, #{pphon,jdbcType=VARCHAR}, 
+      #{pdianhua,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.call.person.bean.Person" >
+    insert into person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="plocation != null" >
+        plocation,
+      </if>
+      <if test="paddress != null" >
+        paddress,
+      </if>
+      <if test="pzipcode != null" >
+        pzipcode,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pphon != null" >
+        pphon,
+      </if>
+      <if test="pdianhua != null" >
+        pdianhua,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="plocation != null" >
+        #{plocation,jdbcType=VARCHAR},
+      </if>
+      <if test="paddress != null" >
+        #{paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pzipcode != null" >
+        #{pzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pphon != null" >
+        #{pphon,jdbcType=VARCHAR},
+      </if>
+      <if test="pdianhua != null" >
+        #{pdianhua,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.call.person.bean.PersonExample" resultType="java.lang.Integer" >
+    select count(*) from person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update person
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.plocation != null" >
+        plocation = #{record.plocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paddress != null" >
+        paddress = #{record.paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pzipcode != null" >
+        pzipcode = #{record.pzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pphon != null" >
+        pphon = #{record.pphon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdianhua != null" >
+        pdianhua = #{record.pdianhua,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update person
+    set pid = #{record.pid,jdbcType=INTEGER},
+      plocation = #{record.plocation,jdbcType=VARCHAR},
+      paddress = #{record.paddress,jdbcType=VARCHAR},
+      pzipcode = #{record.pzipcode,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      pphon = #{record.pphon,jdbcType=VARCHAR},
+      pdianhua = #{record.pdianhua,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.call.person.bean.Person" >
+    update person
+    <set >
+      <if test="plocation != null" >
+        plocation = #{plocation,jdbcType=VARCHAR},
+      </if>
+      <if test="paddress != null" >
+        paddress = #{paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pzipcode != null" >
+        pzipcode = #{pzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pphon != null" >
+        pphon = #{pphon,jdbcType=VARCHAR},
+      </if>
+      <if test="pdianhua != null" >
+        pdianhua = #{pdianhua,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.call.person.bean.Person" >
+    update person
+    set plocation = #{plocation,jdbcType=VARCHAR},
+      paddress = #{paddress,jdbcType=VARCHAR},
+      pzipcode = #{pzipcode,jdbcType=VARCHAR},
+      pname = #{pname,jdbcType=VARCHAR},
+      pphon = #{pphon,jdbcType=VARCHAR},
+      pdianhua = #{pdianhua,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,113 @@
+@charset "utf-8";
+.buyDiv{
+	margin-top:10px;
+	width:800px;
+	margin-bottom:25px;
+	}
+.buyHeader{
+	width:800px;
+	height:25px;
+	background:#F8F8F8;
+	text-align:center;
+	}
+.buyHeader h1{
+	line-height:25px;
+	color:#DE3237;
+	font-size:16px;
+	float:left;
+	margin-left:10px;
+	}
+.buyHeader .innerDiv{
+	width:100px;
+	height:25px;
+	background-color:#DE3237;
+	cursor:pointer;
+	text-align:center;
+	color:#FFF;
+	float:right;
+	margin-right:2px;
+	line-height:25px;
+	}	
+.buyBody{
+	width:800px;
+	height:400px;
+	text-align:center;
+	}
+.buyFoot{
+	width:800px;
+	height:75px;
+	text-align:center;
+	}	
+.buyTable{
+	margin-top:25px;
+	width:800px;
+	color:#666666;	
+	}
+.buyTable tr{
+	height:30px;
+	}
+.buyTable tr:hover{
+	background-color:#F8F8F8;
+	}			
+.pageDiv{
+	background-color:#F8F8F8;
+	height:28px;
+	line-height:28px;
+	}	
+.pageDiv span{
+	float:right;
+	margin-right:100px;
+	}
+.registField{
+	margin-top:25px;
+	width:100%;
+	height:100%;
+	border:1px solid #DE3237;
+	border-radius:5px;
+	}	
+.registTable{
+	margin-top:0px;
+	width:95%;
+	color:#666666;
+	}	
+.registTable tr{
+	height:30px;
+	}	
+	
+.loginBody{
+	width:800px;
+	height:150px;
+	text-align:center;
+	}	 	 
+.infoBody{
+	width:800px;
+	height:400px;
+	text-align:center;
+	}
+	
+.infoField{
+	margin-top:25px;
+	width:100%;
+	height:85%;
+	border:1px solid #DE3237;
+	}		
+	
+.buttonContent{
+	width:63.1%;
+	margin-top:5px;
+	margin-bottom:5px;	
+	}	
+.buttonDiv{
+	width:60px;
+	height:30px;
+	background-color:#DE3237;
+	text-align:center;
+	float:right;
+	margin-right:5px;
+	border:1px solid red;
+	line-height:30px;
+	color:#FFF;
+	cursor:pointer;
+	border-radius:3px;
+	font-size:12px;
+	}	
