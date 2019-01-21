@@ -26,7 +26,7 @@
   <div class="container">  
   	 <div id="button" class="mt10">
        <input type="button" name="button" class="btn btn82 btn_add" onClick="location.href='add.jsp'" value="项目">
-       <input type="button" name="button" class="btn btn82 btn_add" onClick="location.href='return.jsp'" value="回报">
+
      </div>
      <div id="forms" class="mt10">
         <div class="box">
@@ -34,9 +34,9 @@
             <div class="box_top"><b class="pl15">项目添加</b></div>
             <div class="box_center">
               <form action="javascript:location.href='list.jsp'" class="jqtransform">
-               <table class="form_table pt15 pb15" width="100%" border="0" cellpadding="0" cellspacing="0">
-               	
-                
+               <table  class="form_table pt15 pb15" width="100%"  cellpadding="0" cellspacing="0">
+
+
                 <tr>
                   <td class="td_left"><h3>项目信息：</h3></td>
                   <td class=""> 
@@ -98,10 +98,7 @@
                     <textarea name="" id="" cols="30" rows="10" class="textarea" style="resize:none;"></textarea>
                   </td>
                  </tr>
-                     
-                     
-                     
-                     
+
                  <tr>
                   <td class="td_left"><h3>发起人信息：</h3></td>
                   <td class=""> 
@@ -122,42 +119,13 @@
                 	</tr>
                     
                     <tr>
-                  	<td class="td_right">企业营业执照副本扫描件：</td>
-                  	<td class=""><input type="file" name="file" class="input-text lh30" size="10"></td>
-                 	</tr>
-                 
-                 	<tr>
-                  	<td class="td_right">法人身份证反面扫描件：</td>
-                  	<td class=""><input type="file" name="file" class="input-text lh30" size="10"></td>
-                 	</tr>
-                 
-                 	<tr>
-                  	<td class="td_right">经办人身份证反面扫描件：</td>
-                  	<td class=""><input type="file" name="file" class="input-text lh30" size="10"></td>
-                 	</tr>
-                    
-                    <tr>
                   	<td class="td_right">经办人联系电话：</td>
                   	<td class=""> 
                     <input type="text" name="name" class="input-text lh30" size="40">元
                  	</td>                 
                 	</tr>
                     
-                    <tr>
-                  	<td class="td_right">组织机构代码证扫描件：</td>
-                  	<td class=""><input type="file" name="file" class="input-text lh30" size="10"></td>
-                 	</tr>
-                 
-                 	<tr>
-                  	<td class="td_right">税务登记副本扫描件：</td>
-                  	<td class=""><input type="file" name="file" class="input-text lh30" size="10"></td>
-                 	</tr>
-                 
-                 	<tr>
-                  	<td class="td_right">银行结算账户开户许可证扫描件：</td>
-                  	<td class=""><input type="file" name="file" class="input-text lh30" size="10"></td>
-                 	</tr>
-                    
+
                     <tr>
                   	<td class="td_right">银行：</td>
                   	<td class=""> 
@@ -180,14 +148,63 @@
                     <input type="text" name="name" class="input-text lh30" size="40">元
                  	</td>                 
                 	</tr>
-                    
-                 <tr>
-                   <td class="td_right">&nbsp;</td>
-                   <td class="">
-                     <input type="button" name="button" class="btn btn82 btn_save2" onClick="javascript:location.href='return.jsp'" value="下一步" />
-                    <input type="button" name="button" class="btn btn82 btn_res" value="返回" onclick="history.back();" /> 
-                   </td>
-                 </tr>
+                   <div class="box_top"><b class="pl15">添加回报</b></div>
+                   <table  class="form_table pt15 pb15" width="100%" border="0" cellpadding="0" cellspacing="0">
+
+                       <tr>
+                           <td class="td_right">回报类型：</td>
+                           <td class="">
+                    <span class="fl">
+                      <div class="select_border">
+                        <div class="select_containers ">
+                        <select name="" class="select">
+                        <option>演唱会门票</option>
+                        <option>体育赛事门票</option>
+                        </select>
+                        </div>
+                      </div>
+                    </span>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td class="td_right">支付金额：</td>
+                           <td class="">
+                               <input type="text" name="name" class="input-text lh30" size="40">
+                           </td>
+                       </tr>
+                       <tr >
+                           <td class="td_right">回报内容：</td>
+                           <td class="">
+                               <textarea name="" id="" cols="30" rows="10" class="textarea" style="resize:none;"></textarea>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td class="td_right">回报图片：</td>
+                           <td class="">
+                               <input type="file" name="file" class="input-text lh30" size="10">
+                           </td>
+                       </tr>
+                       <tr>
+                           <td class="td_right">限定名额：</td>
+                           <td class="">
+                               <input type="text" name="name" class="input-text lh30" size="40">
+                           </td>
+                       </tr>
+                       <tr>
+                           <td class="td_right">回报时间：</td>
+                           <td class="">
+                               项目结束后&nbsp;&nbsp;<input type="text" name="name" class="input-text lh30" size="10">天
+                           </td>
+                       </tr>
+
+                   <tr>
+                       <td class="td_right">&nbsp;</td>
+
+                       <td class=""  >
+                           <input type="button" name="button" class="btn btn82 btn_res" onClick="alert('操作成功！')" value="提交">
+                       </td>
+                   </tr>
+                   </table>
                </table>
                </form>
             </div>

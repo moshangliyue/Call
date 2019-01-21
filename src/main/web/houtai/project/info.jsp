@@ -26,7 +26,7 @@
   <div class="container">  
   	 <div id="button" class="mt10">
        <input type="button" name="button" class="btn btn82 btn_add" onClick="location.href='add.jsp'" value="项目">
-       <input type="button" name="button" class="btn btn82 btn_add" onClick="location.href='return.jsp'" value="回报">
+
      </div>
      <div id="forms" class="mt10">
         <div class="box">
