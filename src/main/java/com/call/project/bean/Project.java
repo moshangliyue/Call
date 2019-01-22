@@ -1,5 +1,7 @@
 package com.call.project.bean;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Date;
 
 public class Project {
@@ -181,5 +183,40 @@ public class Project {
 
     public void setPhday(Integer phday) {
         this.phday = phday;
+    }
+
+    private MultipartFile file;
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "pid=" + pid +
+                ", pname='" + pname + '\'' +
+                ", pintro='" + pintro + '\'' +
+                ", ptypes='" + ptypes + '\'' +
+                ", pamount=" + pamount +
+                ", pstart=" + pstart +
+                ", pend=" + pend +
+                ", pimg='" + pimg + '\'' +
+                ", pdetail='" + pdetail + '\'' +
+                ", pcomname='" + pcomname + '\'' +
+                ", pcomphon='" + pcomphon + '\'' +
+                ", pbank='" + pbank + '\'' +
+                ", pbanknumber='" + pbanknumber + '\'' +
+                ", phtypes='" + phtypes + '\'' +
+                ", phamount=" + phamount +
+                ", phcontent='" + phcontent + '\'' +
+                ", phnumberpeople=" + phnumberpeople +
+                ", phday=" + phday +
+
+                '}';
     }
 }

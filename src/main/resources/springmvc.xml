@@ -15,8 +15,27 @@
     <!-- 扫描哪些包 -->
     <context:component-scan base-package="com.call.*" />
 
+    <bean name="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+
+        <property name="converters">
+            <set>
+                <bean class="com.call.util.DateConvertor"></bean>
+                <bean class="com.call.util.MyTrimString"></bean>
+            </set>
+        </property>
+    </bean>
+    <!-- 上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 最大内存大小 -->
+        <property name="maxInMemorySize" value="10240"/>
+        <!-- 最大文件大小，-1为不限制大小 -->
+        <property name="maxUploadSize" value="-1"/>
+    </bean>
+
+
     <!-- 开启springmvc的注解操作 -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven conversion-service="conversionService"/>
 
     <!-- 将dispatcherServlet 不能处理的请求推给 默认servlet执行 -->
 
