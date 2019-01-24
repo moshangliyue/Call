@@ -1,5 +1,6 @@
 package com.call.project.bean;
 
+import com.call.geton.bean.Geton;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -40,6 +41,27 @@ public class Project {
     private Integer phnumberpeople;
 
     private Integer phday;
+
+    private Integer percent;
+
+    public Integer getPercent() {
+        return percent;
+    }
+
+    public void setPercent(Integer percent) {
+        this.percent = percent;
+    }
+
+    //认投金额
+    private Geton geton;
+
+    public Geton getGeton() {
+        return geton;
+    }
+
+    public void setGeton(Geton geton) {
+        this.geton = geton;
+    }
 
     public Integer getPid() {
         return pid;
@@ -198,25 +220,8 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                "pid=" + pid +
-                ", pname='" + pname + '\'' +
-                ", pintro='" + pintro + '\'' +
-                ", ptypes='" + ptypes + '\'' +
-                ", pamount=" + pamount +
-                ", pstart=" + pstart +
-                ", pend=" + pend +
-                ", pimg='" + pimg + '\'' +
-                ", pdetail='" + pdetail + '\'' +
-                ", pcomname='" + pcomname + '\'' +
-                ", pcomphon='" + pcomphon + '\'' +
-                ", pbank='" + pbank + '\'' +
-                ", pbanknumber='" + pbanknumber + '\'' +
-                ", phtypes='" + phtypes + '\'' +
-                ", phamount=" + phamount +
-                ", phcontent='" + phcontent + '\'' +
-                ", phnumberpeople=" + phnumberpeople +
-                ", phday=" + phday +
-
+                "percent=" + percent +
                 '}';
     }
 }
+

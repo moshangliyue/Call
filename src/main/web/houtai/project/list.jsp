@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" isErrorPage="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
  <html lang="zh-CN">
  <head>
@@ -8,7 +10,50 @@
    <script type="text/javascript" src="../js/jquery.min.js"></script>
    <script type="text/javascript" src="../js/colResizable-1.3.min.js"></script>
    <script type="text/javascript" src="../js/common.js"></script>
-   
+     <script type="application/javascript" src="../js/Dateshift.js"></script>
+     <script type="application/javascript">
+
+
+     <%--  $(function () {
+           $.ajax({
+               type: "post",
+               url: "${pageContext.request.contextPath}/pro/selectsave",
+               dataType: "json",
+               success: function(result){
+                   $(result).each(function (index, item) {
+
+                       //时间转换、
+                       var pstart = getMyDate(parseInt(item.pstart));
+                       var pend = getMyDate(parseInt(item.pend));
+
+
+
+                       var bili=Math.floor(item.geton.ging/item.pamount*100);
+                       var idtr ='tr';
+                       var tr = "<tr class='tr' id='"+idtr +(index+1)+"'>" +
+                           " <td align='center'>"+item.pid+"</td>" +
+                           "<td align='center'>"+item.pname+"</td>" +
+                           "<td align='center'>"+item.pcomname+"</td>" +
+                           "<td align='center'>"+item.ptypes+"</td>" +
+                           " <td align='center'>"+item.pamount+"</td>" +
+                           "<td align='center'>"+item.geton.ging+"</td>" +
+                           " <td align='center'>"+bili+"%</td>" +
+                           "<td align='center'>"+pstart+"</td>" +
+                           "<td align='center'>"+pend+"</td>" +
+                           " <td align='center'>\n" +
+                           " <a href='edit.jsp' class='ext_btn'>编辑修改</a>&nbsp;&nbsp;" +
+                           "<a href=\"#\" class=\"ext_btn\">满标确认</a>\n" +
+                           "</td></tr>";
+                       $("#"+idtr+index+"").after(tr);
+                   });
+               }
+           });
+       })
+
+    --%>
+
+     </script>
+
    <script type="text/javascript">
       $(function(){  
         $(".list_table").colResizable({
@@ -54,7 +99,7 @@
      <div id="table" class="mt10">
         <div class="box span10 oh">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
-                <tr>
+                <tr id="tr0">
                    <th>ID</th>
                    <th>项目名称</th>
                    <th>发起方</th>
@@ -66,50 +111,43 @@
                    <th>结束时间</th>
                    <th width="200">操作</th>
                 </tr>
-                
+                <c:forEach items="${pi.list}" var="pro">
                 <tr class="tr">
-                   <td align="center">1</td>
-                   <td align="center">张学友演唱会</td>
-                   <td align="center">山东日报</td>
-                   <td align="center">演出</td>
-                   <td align="center">100</td>
-                   <td align="center">50</td>
-                   <td align="center">50%</td>
-                   <td align="center">2016-01-01</td>
-                   <td align="center">2016-01-15</td>
+                   <td align="center">${pro.pid}</td>
+                   <td align="center">${pro.pname}</td>
+                   <td align="center">${pro.pcomname}</td>
+                   <td align="center">${pro.ptypes}</td>
+                   <td align="center">${pro.pamount}</td>
+                   <td align="center">${pro.geton.ging}</td>
+                   <td align="center" >${pro.percent}%</td>
+                   <td align="center"></td>
+                   <td align="center"></td>
                    <td align="center">
                         <a href="edit.jsp" class="ext_btn">编辑修改</a>&nbsp;&nbsp;
                         <a href="#" class="ext_btn">满标确认</a>
                    </td>	
                  </tr>
-                 <tr class="tr">
-                   <td align="center">2</td>
-                   <td align="center">张学友演唱会</td>
-                   <td align="center">山东日报</td>
-                   <td align="center">演出</td>
-                   <td align="center">100</td>
-                   <td align="center">100</td>
-                   <td align="center">100%</td>
-                   <td align="center">2016-01-01</td>
-                   <td align="center">2016-01-15</td>
-                   <td align="center">
-                        <a href="edit.jsp" class="ext_btn">编辑修改</a>&nbsp;&nbsp;
-                        <a href="#" class="ext_btn" style="cursor:auto;">满标确认</a>
-                   </td>	
-                 </tr>
-                 
+                </c:forEach>
               </table>
               <div class="page mt10">
                 <div class="pagination">
                   <ul>
-                      <li class="first-child"><a href="#">首页</a></li>
-                      <li class="disabled"><span>上一页</span></li>
-                      <li class="active"><span>1</span></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">下一页</a></li>
-                      <li class="last-child"><a href="#">末页</a></li>
-                  	  <li class="disabled"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总共2页&nbsp;&nbsp;每页10条&nbsp;&nbsp;当前第1页&nbsp;&nbsp;总共15条</span></li>
-                  </ul> 
+                      <li class="first-child"><a href="${pageContext.request.contextPath}/">首页</a></li>
+                      <li class="disabled">
+                          <c:if test="${pi.pageNum != 1}">
+                            <a href="${pageContext.request.contextPath}/pro/selectsave?currpage=${pi.prePage}">上一页</a>
+                          </c:if>
+                      </li>
+                     <%-- <li class="active"><span>1</span></li>
+                      <li><a href="#">2</a></li>--%>
+                      <li>
+                          <c:if test="${pi.pageNum != pi.pages}">
+                            <a href="${pageContext.request.contextPath}/pro/selectsave?currpage=${pi.nextPage}">下一页</a>
+                          </c:if>
+                      </li>
+                      <li class="last-child"><a href="${pageContext.request.contextPath}/pro/selectsave?currpage=${pi.pages}">尾页</a></li>
+                  	  <li class="disabled"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总共${pi.pages}页&nbsp;&nbsp;每页10条&nbsp;&nbsp;当前第${pi.pageNum}页&nbsp;&nbsp;</span></li>
+                  </ul>
                 </div>
 
               </div>

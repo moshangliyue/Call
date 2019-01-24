@@ -10,6 +10,8 @@
     <result column="pphon" property="pphon" jdbcType="VARCHAR" />
     <result column="pdianhua" property="pdianhua" jdbcType="VARCHAR" />
   </resultMap>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

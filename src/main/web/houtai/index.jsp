@@ -102,7 +102,7 @@ function back(){
           <h3>项目管理</h3>
           <ul>
             <li><a href="project/add.jsp" target="right">项目创建</a></li>
-            <li><a href="project/list.jsp" target="right">进行中项目</a></li>
+            <li><a href="${pageContext.request.contextPath}/pro/selectsave" target="right">进行中项目</a></li>
             <li><a href="project/listFail.jsp" target="right">失败项目</a></li>
             <li><a href="project/listSuccess.jsp" target="right">满标项目</a></li>
           </ul>

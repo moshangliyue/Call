@@ -3,17 +3,22 @@ package com.call.project.controller;
 import com.call.project.Service.ProjectService;
 import com.call.project.bean.Project;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
-
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -62,9 +67,46 @@ public class ProjectController {
         if(b){
             return "redirect:../houtai/main.jsp";
         }
-
         return "errey";
     }
+    //查询所有项目展示
+    @RequestMapping("selectsave")
+    public String selectsave(@RequestParam(value="currpage",defaultValue="1")Integer currentPage, @RequestParam(value="pagesize",defaultValue="2") Integer size, HttpSession session){
+        PageHelper.startPage(currentPage,size);
+        List<Project> list = projectService.selectsave();
+        for (Project pro:list) {
+            int a = pro.getGeton().getGing();
+            int b=pro.getPamount();
+           double sss= (double)a/b*100;
+           pro.setPercent((int)Math.floor(sss));
+        }
+        PageInfo<Project> pageInfo = new PageInfo<>(list);
+        session.setAttribute("pi",pageInfo);
+        return  "redirect:../houtai/project/list.jsp";
+    }
 
+    //查询未达标的项目
+    @RequestMapping("updone")
+    @ResponseBody
+    public List<Project> updone(){
+        List<Project> selectsave = projectService.selectsave();
+        //项目结束时间超时并且完成比例不足100%
+
+
+        for (int i=0;i<selectsave.size();i++){
+            Project pro = selectsave.get(i);
+            int bili =(int)Math.floor(pro.getGeton().getGing()/pro.getPamount());
+            if((pro.getPend()).before(new Date())){
+                    if(bili>=1){
+                        selectsave.remove(i);
+                        i--;
+                    }
+            }else {
+                selectsave.remove(i);
+                i--;
+            }
+        }
+        return selectsave;
+     }
 }
 

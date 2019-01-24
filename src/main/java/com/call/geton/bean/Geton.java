@@ -30,4 +30,14 @@ public class Geton {
     public void setPid(Integer pid) {
         this.pid = pid;
     }
+
+
+    @Override
+    public String toString() {
+        return "Geton{" +
+                "gid=" + gid +
+                ", ging=" + ging +
+                ", pid=" + pid +
+                '}';
+    }
 }

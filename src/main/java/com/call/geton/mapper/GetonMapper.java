@@ -29,4 +29,7 @@ public interface GetonMapper {
     int updateByPrimaryKeySelective(Geton record);
 
     int updateByPrimaryKey(Geton record);
+
+    Geton selectByPid(Integer pid);
+
 }

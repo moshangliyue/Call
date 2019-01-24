@@ -8,7 +8,50 @@
    <script type="text/javascript" src="../js/jquery.min.js"></script>
    <script type="text/javascript" src="../js/colResizable-1.3.min.js"></script>
    <script type="text/javascript" src="../js/common.js"></script>
-   
+     <script type="application/javascript" src="../js/Dateshift.js"></script>
+     <script type="application/javascript">
+         $(function () {
+             $.ajax({
+                 type: "post",
+                 url: "${pageContext.request.contextPath}/pro/updone",
+                 dataType: "json",
+                 success: function(result){
+                     $(result).each(function (index, item) {
+
+                         //时间转换、
+                         var pstart = getMyDate(parseInt(item.pstart));
+                         var pend = getMyDate(parseInt(item.pend));
+
+
+
+                         var bili=Math.floor(item.geton.ging/item.pamount*100);
+                         var idtr ='tr';
+                         var tr = "<tr class='tr' id='"+idtr +(index+1)+"'>" +
+                             " <td align='center'>"+item.pid+"</td>" +
+                             "<td align='center'>"+item.pname+"</td>" +
+                             "<td align='center'>"+item.pcomname+"</td>" +
+                             "<td align='center'>"+item.ptypes+"</td>" +
+                             "<td align='center'>筹款失败</td>" +
+                             " <td align='center'>"+item.pamount+"</td>" +
+                             "<td align='center'>"+item.geton.ging+"</td>" +
+                             " <td align='center'>"+bili+"%</td>" +
+                             "<td align='center'>"+pstart+"</td>" +
+                             "<td align='center'>"+pend+"</td>" +
+                             " <td align='center'>\n" +
+                             "<a class='ext_btn' style='cursor:auto;'>流标已审核</a>&nbsp;&nbsp;"+
+                             "</td></tr>";
+                         $("#"+idtr+index+"").after(tr);
+                     });
+                 }
+             });
+         })
+
+
+
+     </script>
+
+
+
    <script type="text/javascript">
       $(function(){  
         $(".list_table").colResizable({
@@ -52,7 +95,7 @@
      <div id="table" class="mt10">
         <div class="box span10 oh">
               <table width="100%" border="0" cellpadding="0" cellspacing="0" class="list_table">
-                <tr>
+                <tr id="tr0">
                    <th>ID</th>
                    <th>项目名称</th>
                    <th>发起方</th>
@@ -66,7 +109,7 @@
                    <th width="100">操作</th>
                 </tr>
                 
-                <tr class="tr">
+          <%--      <tr class="tr">
                    <td align="center">1</td>
                    <td align="center">张学友演唱会</td>
                    <td align="center">山东日报</td>
@@ -81,37 +124,8 @@
                         <a class="ext_btn" style="cursor:auto;">流标已审核</a>&nbsp;&nbsp;
                    </td>	
                  </tr>
-                 <tr class="tr">
-                   <td align="center">1</td>
-                   <td align="center">张学友演唱会</td>
-                   <td align="center">山东日报</td>
-                   <td align="center">演出</td>
-                   <td align="center">筹款失败</td>
-                   <td align="center">100</td>
-                   <td align="center">50</td>
-                   <td align="center">50%</td>
-                   <td align="center">2016-01-01</td>
-                   <td align="center">2016-01-15</td>
-                   <td align="center">
-                        <a href="check.jsp" class="ext_btn">流标审核</a>&nbsp;&nbsp;
-                   </td>	
-                 </tr>
-                 <tr class="tr">
-                   <td align="center">1</td>
-                   <td align="center">张学友演唱会</td>
-                   <td align="center">山东日报</td>
-                   <td align="center">演出</td>
-                   <td align="center">筹款失败</td>
-                   <td align="center">100</td>
-                   <td align="center">50</td>
-                   <td align="center">50%</td>
-                   <td align="center">2016-01-01</td>
-                   <td align="center">2016-01-15</td>
-                   <td align="center">
-                        <a href="check.jsp" class="ext_btn">流标审核</a>&nbsp;&nbsp;
-                   </td>	
-                 </tr>
-                 
+--%>
+
                  
               </table>
               <div class="page mt10">

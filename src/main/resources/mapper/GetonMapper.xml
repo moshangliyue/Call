@@ -6,6 +6,14 @@
     <result column="ging" property="ging" jdbcType="INTEGER" />
     <result column="pid" property="pid" jdbcType="INTEGER" />
   </resultMap>
+
+
+  <select id="selectByPid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+      select * from geton where pid =#{pid}
+  </select>
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

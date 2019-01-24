@@ -21,6 +21,19 @@
     <result column="phnumberpeople" property="phnumberpeople" jdbcType="INTEGER" />
     <result column="phday" property="phday" jdbcType="INTEGER" />
   </resultMap>
+  <!--<resultMap id="newProjectMap" type="com.call.project.bean.Project" extends="BaseResultMap">
+      <association property="geton" column="pid" javaType="com.call.geton.bean.Geton" select="com.call.geton.mapper.GetonMapper.selectByPid">
+
+      </association>
+
+  </resultMap>-->
+  <select id="saveAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select <include refid="Base_Column_List"/> from project
+</select>
+
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
