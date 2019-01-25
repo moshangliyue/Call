@@ -5,6 +5,7 @@ import com.call.project.bean.Project;
 import com.call.project.bean.ProjectExample;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ProjectMapper {
@@ -29,4 +30,8 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+
+     List<Project> selectDateAndpercent(Date date);
+
+
 }

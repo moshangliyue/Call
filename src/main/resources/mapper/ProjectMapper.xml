@@ -21,17 +21,20 @@
     <result column="phnumberpeople" property="phnumberpeople" jdbcType="INTEGER" />
     <result column="phday" property="phday" jdbcType="INTEGER" />
   </resultMap>
-  <!--<resultMap id="newProjectMap" type="com.call.project.bean.Project" extends="BaseResultMap">
-      <association property="geton" column="pid" javaType="com.call.geton.bean.Geton" select="com.call.geton.mapper.GetonMapper.selectByPid">
-
+  <resultMap id="newProjectMap" type="com.call.project.bean.Project" extends="BaseResultMap">
+      <association property="geton" column="pid" javaType="com.call.geton.bean.Geton" >
+        <id property="gid" column="gid"/>
+        <result property="ging" column="ging"/>
+        <result property="pid" column="pid"/>
       </association>
-
-  </resultMap>-->
-  <select id="saveAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  </resultMap>
+<!--  <select id="saveAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select <include refid="Base_Column_List"/> from project
+</select>-->
+<select id="selectDateAndpercent" resultMap="newProjectMap" parameterType="java.util.Date">
+select p.* from project p LEFT OUTER JOIN geton g ON p.pid=g.pid where p.pamount>g.ging and p.pend &lt; #{date}
+
 </select>
-
-
 
 
   <sql id="Example_Where_Clause" >

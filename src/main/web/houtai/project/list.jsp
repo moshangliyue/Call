@@ -12,7 +12,42 @@
    <script type="text/javascript" src="../js/common.js"></script>
      <script type="application/javascript" src="../js/Dateshift.js"></script>
      <script type="application/javascript">
+        function chaxun() {
+            $(".tr").remove();
+            var name=$("#name").val();
 
+            $.ajax({
+                type: "post",
+                url: "${pageContext.request.contextPath}/pro/selectByname",
+                data:{"pname":name},
+                dataType: "json",
+                success: function(result){
+                    $(result).each(function (index, item) {
+
+                        //时间转换、
+                        var pstart = getMyDate(parseInt(item.pstart));
+                        var pend = getMyDate(parseInt(item.pend));
+                        var bili=Math.floor(item.geton.ging/item.pamount*100);
+                        var idtr ='tr';
+                        var tr = "<tr class='tr' id='"+idtr +(index+1)+"'>" +
+                            " <td align='center'>"+item.pid+"</td>" +
+                            "<td align='center'>"+item.pname+"</td>" +
+                            "<td align='center'>"+item.pcomname+"</td>" +
+                            "<td align='center'>"+item.ptypes+"</td>" +
+                            " <td align='center'>"+item.pamount+"</td>" +
+                            "<td align='center'>"+item.geton.ging+"</td>" +
+                            " <td align='center'>"+bili+"%</td>" +
+                            "<td align='center'>"+pstart+"</td>" +
+                            "<td align='center'>"+pend+"</td>" +
+                            " <td align='center'>\n" +
+                            " <a href='edit.jsp' class='ext_btn'>编辑修改</a>&nbsp;&nbsp;" +
+                            "<a href=\"#\" class=\"ext_btn\">满标确认</a>\n" +
+                            "</td></tr>";
+                        $("#"+idtr+index+"").after(tr);
+                    });
+                }
+            });
+        }
 
      <%--  $(function () {
            $.ajax({
@@ -78,7 +113,7 @@
               <table class="form_table" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td>项目名称</td>
-                  <td><input type="text" name="name" class="input-text lh25" size="10"></td>
+                  <td><input type="text" id="name" class="input-text lh25" size="10"></td>
                   <td></td>
                   <td>
                   </td>
@@ -87,7 +122,7 @@
             </div>
             <div class="box_bottom pb5 pt5 pr10" style="border-top:1px solid #dadada;">
               <div class="search_bar_btn" style="text-align:right;">
-              	 <input type="button" name="button" class="btn btn82 btn_search" value="查询">
+              	 <input type="button" name="button" onclick="chaxun()" class="btn btn82 btn_search" value="查询">
                                                                                               <!--
                                                                                               
                  <input type="button" name="button" class="btn btn82 btn_add" value="新增" onClick="location.href='add.jsp'" />-->
@@ -112,7 +147,7 @@
                    <th width="200">操作</th>
                 </tr>
                 <c:forEach items="${pi.list}" var="pro">
-                <tr class="tr">
+                <tr class="tr" >
                    <td align="center">${pro.pid}</td>
                    <td align="center">${pro.pname}</td>
                    <td align="center">${pro.pcomname}</td>
@@ -120,10 +155,10 @@
                    <td align="center">${pro.pamount}</td>
                    <td align="center">${pro.geton.ging}</td>
                    <td align="center" >${pro.percent}%</td>
-                   <td align="center"></td>
-                   <td align="center"></td>
+                   <td align="center"><fmt:formatDate value="${pro.pstart}" pattern="yyyy-MM-dd"/> </td>
+                   <td align="center"><fmt:formatDate value="${pro.pend}" pattern="yyyy-MM-dd"/></td>
                    <td align="center">
-                        <a href="edit.jsp" class="ext_btn">编辑修改</a>&nbsp;&nbsp;
+                        <a href="${pageContext.request.contextPath}/pro/selectBypid?pid=${pro.pid}" class="ext_btn">编辑修改</a>&nbsp;&nbsp;
                         <a href="#" class="ext_btn">满标确认</a>
                    </td>	
                  </tr>
@@ -132,14 +167,12 @@
               <div class="page mt10">
                 <div class="pagination">
                   <ul>
-                      <li class="first-child"><a href="${pageContext.request.contextPath}/">首页</a></li>
+                      <li class="first-child"><a href="${pageContext.request.contextPath}/pro/selectsave?currpage=1">首页</a></li>
                       <li class="disabled">
                           <c:if test="${pi.pageNum != 1}">
                             <a href="${pageContext.request.contextPath}/pro/selectsave?currpage=${pi.prePage}">上一页</a>
                           </c:if>
                       </li>
-                     <%-- <li class="active"><span>1</span></li>
-                      <li><a href="#">2</a></li>--%>
                       <li>
                           <c:if test="${pi.pageNum != pi.pages}">
                             <a href="${pageContext.request.contextPath}/pro/selectsave?currpage=${pi.nextPage}">下一页</a>

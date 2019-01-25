@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" isErrorPage="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
  <html lang="zh-CN">
  <head>
@@ -10,7 +12,7 @@
    <script type="text/javascript" src="../js/common.js"></script>
      <script type="application/javascript" src="../js/Dateshift.js"></script>
      <script type="application/javascript">
-         $(function () {
+        <%-- $(function () {
              $.ajax({
                  type: "post",
                  url: "${pageContext.request.contextPath}/pro/updone",
@@ -50,7 +52,7 @@
 
      </script>
 
-
+--%>
 
    <script type="text/javascript">
       $(function(){  
@@ -126,19 +128,41 @@
                  </tr>
 --%>
 
-                 
+                  <c:forEach items="${pi.list}" var="pro">
+                      <tr class="tr">
+                          <td align="center">${pro.pid}</td>
+                          <td align="center">${pro.pname}</td>
+                          <td align="center">${pro.pcomname}</td>
+                          <td align="center">${pro.ptypes}</td>
+                          <td align="center">筹款失败</td>
+                          <td align="center">${pro.pamount}</td>
+                          <td align="center">${pro.geton.ging}</td>
+                          <td align="center" >${pro.percent}%</td>
+                          <td align="center"><fmt:formatDate value="${pro.pstart}" pattern="yyyy-MM-dd"/> </td>
+                          <td align="center"><fmt:formatDate value="${pro.pend}" pattern="yyyy-MM-dd"/></td>
+                          <td align="center">
+                              <a class="ext_btn" style="cursor:auto;">流标已审核</a>&nbsp;&nbsp;
+                          </td>
+                      </tr>
+                  </c:forEach>
               </table>
               <div class="page mt10">
                 <div class="pagination">
-                  <ul>
-                      <li class="first-child"><a href="#">首页</a></li>
-                      <li class="disabled"><span>上一页</span></li>
-                      <li class="active"><span>1</span></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">下一页</a></li>
-                      <li class="last-child"><a href="#">末页</a></li>
-                  	  <li class="disabled"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总共2页&nbsp;&nbsp;每页10条&nbsp;&nbsp;当前第1页&nbsp;&nbsp;总共15条</span></li>
-                  </ul> 
+                    <ul>
+                        <li class="first-child"><a href="${pageContext.request.contextPath}/">首页</a></li>
+                        <li class="disabled">
+                            <c:if test="${pi.pageNum != 1}">
+                                <a href="${pageContext.request.contextPath}/pro/updone?currpage=${pi.prePage}">上一页</a>
+                            </c:if>
+                        </li>
+                        <li>
+                            <c:if test="${pi.pageNum != pi.pages}">
+                                <a href="${pageContext.request.contextPath}/pro/updone?currpage=${pi.nextPage}">下一页</a>
+                            </c:if>
+                        </li>
+                        <li class="last-child"><a href="${pageContext.request.contextPath}/pro/updone?currpage=${pi.pages}">尾页</a></li>
+                        <li class="disabled"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总共${pi.pages}页&nbsp;&nbsp;每页10条&nbsp;&nbsp;当前第${pi.pageNum}页&nbsp;&nbsp;</span></li>
+                    </ul>
                 </div>
 
               </div>

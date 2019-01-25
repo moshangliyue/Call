@@ -220,7 +220,27 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                "percent=" + percent +
+                "pid=" + pid +
+                ", pname='" + pname + '\'' +
+                ", pintro='" + pintro + '\'' +
+                ", ptypes='" + ptypes + '\'' +
+                ", pamount=" + pamount +
+                ", pstart=" + pstart +
+                ", pend=" + pend +
+                ", pimg='" + pimg + '\'' +
+                ", pdetail='" + pdetail + '\'' +
+                ", pcomname='" + pcomname + '\'' +
+                ", pcomphon='" + pcomphon + '\'' +
+                ", pbank='" + pbank + '\'' +
+                ", pbanknumber='" + pbanknumber + '\'' +
+                ", phtypes='" + phtypes + '\'' +
+                ", phamount=" + phamount +
+                ", phcontent='" + phcontent + '\'' +
+                ", phnumberpeople=" + phnumberpeople +
+                ", phday=" + phday +
+                ", percent=" + percent +
+                ", geton=" + geton +
+                ", file=" + file +
                 '}';
     }
 }
